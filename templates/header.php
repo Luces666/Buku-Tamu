@@ -20,6 +20,11 @@
     <!-- Custom styles for this template-->
     <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Custom styles for this page -->
+    <link
+        href="assets/vendor/datatables/dataTables.bootstrap4.min.css"
+        rel="stylesheet" />
+
 </head>
 
 <body id="page-top">
@@ -48,27 +53,27 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item"> 
+            <li class="nav-item">
                 <a class="nav-link" href="buku-tamu.php">
-                    <i class="fas fa-fw fa-book-open"></i> 
+                    <i class="fas fa-fw fa-book-open"></i>
                     <span>Buku Tamu</span>
                 </a>
             </li>
 
-            <li class="nav-item"> 
+            <li class="nav-item">
                 <a class="nav-link" href="laporan.php">
-                    <i class="fas fa-fw fa-file-alt"></i> 
+                    <i class="fas fa-fw fa-file-alt"></i>
                     <span>Laporan</span>
                 </a>
             </li>
 
-            <li class="nav-item"> 
+            <li class="nav-item">
                 <a class="nav-link" href="user.php">
-                    <i class="fas fa-fw fa-users"></i> 
+                    <i class="fas fa-fw fa-users"></i>
                     <span>User</span>
                 </a>
             </li>
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
