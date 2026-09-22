@@ -20,7 +20,7 @@ function tambah_tamu($data)
     global $koneksi;
 
     $kode = htmlspecialchars($data["id_tamu"]);
-    $tanggal = date("Y-M-D");
+    $tanggal = date("Y-m-d");
     $nama_tamu = htmlspecialchars($data["nama_tamu"]);
     $alamat = htmlspecialchars($data["alamat"]);
     $no_hp = htmlspecialchars($data["no_hp"]);
