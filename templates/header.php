@@ -76,12 +76,17 @@ if (!isset($_SESSION['login'])) {
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="buku-tamu.php">
-                    <i class="fas fa-fw fa-book-open"></i>
-                    <span>Buku Tamu</span>
-                </a>
-            </li>
+            <?php
+            //cek apabila ada user login dan user role nya adalah operator maka tampilkan buku-tamu
+            if (isset($_SESSION['role']) && $_SESSION['role'] == 'operator') :
+            ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="buku-tamu.php">
+                        <i class="fas fa-fw fa-book-open"></i>
+                        <span>Buku Tamu</span>
+                    </a>
+                </li>
+            <?php endif; ?>
 
             <li class="nav-item">
                 <a class="nav-link" href="laporan.php">
@@ -90,12 +95,17 @@ if (!isset($_SESSION['login'])) {
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="user.php">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>User</span>
-                </a>
-            </li>
+            <?php
+            //cek apabila ada user login dan user role nya adalah admin maka tampilkan buku-tamu
+            if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') :
+            ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="user.php">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>User</span>
+                    </a>
+                </li>
+            <?php endif; ?>
 
 
             <!-- Divider -->

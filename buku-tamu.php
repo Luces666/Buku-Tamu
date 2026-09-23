@@ -2,6 +2,12 @@
 require_once('function.php');
 include_once('templates/header.php');
 
+//pengecekan user role bukan operator maka tidak boleh mengakses halaman
+if (($_SESSION['role']) != 'operator') {
+    echo "<script>alert('anda tidak memiliki akses')</script>";
+    echo "<script>window.location.href='index.php'</script>";
+}
+
 $query = mysqli_query($koneksi, "SELECT max(id_tamu) as kodeTerbesar FROM bukutamu");
 $data = mysqli_fetch_array($query);
 $id_tamu = $data['kodeTerbesar'];

@@ -2,6 +2,12 @@
 require_once('function.php');
 include_once('templates/header.php');
 
+//pengecekan user role bukan admin maka tidak boleh mengakses halaman
+if (($_SESSION['role']) != 'admin') {
+    echo "<script>alert('anda tidak memiliki akses')</script>";
+    echo "<script>window.location.href='index.php'</script>";
+}
+
 $query = mysqli_query($koneksi, "SELECT max(id_user) as kodeTerbesar FROM users");
 $data = mysqli_fetch_array($query);
 $kodeuser = $data['kodeTerbesar'];

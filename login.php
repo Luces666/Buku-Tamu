@@ -3,27 +3,28 @@
 session_start();
 
 //cek bila ada user yang sudah login maka akan redirect ke halaman dashboard
-if(isset($_SESSION['login'])) {
+if (isset($_SESSION['login'])) {
     header('Location: index.php');
 }
 
 require 'koneksi.php';
-if(isset($_POST['login'])){
+if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     $result = mysqli_query($koneksi, "SELECT * FROM users WHERE username = '$username'");
 
     //cek apakah ada username
-    if(mysqli_num_rows($result) === 1){
+    if (mysqli_num_rows($result) === 1) {
 
         //cek apakah passwordnya benar
         $row = mysqli_fetch_assoc($result);
 
-        if(password_verify($password, $row['password'])){
+        if (password_verify($password, $row['password'])) {
             //set session
             $_SESSION['login'] = true;
             $_SESSION['password'] = $username;
+            $_SESSION['role'] = $row['user_role'];
 
             //login berhasil
             header("Location: index.php");
@@ -32,7 +33,6 @@ if(isset($_POST['login'])){
     }
 
     $error = true;
-
 }
 ?>
 
@@ -65,84 +65,85 @@ if(isset($_POST['login'])){
 <body class="bg-gradient-primary">
 
     <div class="container">
+
         <body class="bg-gradient-primary">
-            
-        <div class="container">
 
-        <?php
-        if(isset($error)) : ?>
-        <div class="alert alert-danger mt-3" role="alert">
-            Username atau password salah
-        </div>
-        <?php 
-        endif;
-         ?>
+            <div class="container">
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
+                <?php
+                if (isset($error)) : ?>
+                    <div class="alert alert-danger mt-3" role="alert">
+                        Username atau password salah
+                    </div>
+                <?php
+                endif;
+                ?>
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+                <!-- Outer Row -->
+                <div class="row justify-content-center">
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
-                                <img src="assets/images/login-page.png" alt="">
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    <div class="col-xl-10 col-lg-12 col-md-9">
+
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-6 d-none d-lg-block bg-login-image">
+                                        <img src="assets/images/login-page.png" alt="">
                                     </div>
-                                    <form class="user" method="post" action="">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="username" name="username"
-                                                placeholder="Username...">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Password..">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="remember" name="remember">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                    <div class="col-lg-6">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                            </div>
+                                            <form class="user" method="post" action="">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-user"
+                                                        id="username" name="username"
+                                                        placeholder="Username...">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control form-control-user"
+                                                        id="password" name="password" placeholder="Password..">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox small">
+                                                        <input type="checkbox" class="custom-control-input" id="remember" name="remember">
+                                                        <label class="custom-control-label" for="customCheck">Remember
+                                                            Me</label>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" name="login" class="btn btn-primary btn user
+                                        btn-block">
+                                                    Login
+                                                </button>
+                                            </form>
+                                            <hr>
+                                            <div class="text-center">
+                                                <a class="small" href="forgot-password.html">Forgot Password?</a>
                                             </div>
                                         </div>
-                                        <button type="submit" name="login" class="btn btn-primary btn user
-                                        btn-block">
-                                            Login
-                                        </button>
-                                    </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
 
             </div>
 
-        </div>
+            <!-- Bootstrap core JavaScript-->
+            <script src="assets/jquery/jquery.min.js"></script>
+            <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    </div>
+            <!-- Core plugin JavaScript-->
+            <script src="assets/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="assets/jquery/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="assets/js/sb-admin-2.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="assets/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="assets/js/sb-admin-2.min.js"></script>
-
-</body>
+        </body>
 
 </html>
