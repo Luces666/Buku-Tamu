@@ -9,7 +9,7 @@ if (isset($_POST['tampilkan'])) {
 
     $link = "export-laporan.php?cari=true&p_awal=$p_awal&p_akhir=$p_akhir";
     //query sesuai dengan keywoard
-    $bukutamu = query("SELECT * FROM bukutamu WHERE tanggal BETWEEN 'p_awal' AND 'p_akhir'");
+    $bukutamu = query("SELECT * FROM bukutamu WHERE tanggal BETWEEN '$p_awal' AND '$p_akhir'");
 } else {
     //query ambil semua data buku tamu
     $bukutamu = query("SELECT * FROM bukutamu ORDER BY tanggal DESC");
