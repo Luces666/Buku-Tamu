@@ -1,0 +1,14 @@
+{
+    "name": "user/buku-tamu",
+    "description": "buku-tamu",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "User\\BukuTamu\\": "src/"
+        }
+    },
+    "require": {
+        "phpoffice/phpspreadsheet": "^5.10"
+    }
+}
