@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $row['password'])) {
             //set session
             $_SESSION['login'] = true;
-            $_SESSION['password'] = $username;
+            $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = $row['user_role'];
 
             //login berhasil
@@ -88,8 +88,8 @@ if (isset($_POST['login'])) {
                             <div class="card-body p-0">
                                 <!-- Nested Row within Card Body -->
                                 <div class="row">
-                                    <div class="col-lg-6 d-none d-lg-block bg-login-image">
-                                        <img src="assets/images/login-page.png" alt="">
+                                    <div class="col-lg-6 d-none d-lg-flex align-items-center justify-content-center">
+                                        <img src="assets/img/undraw_posting_photo.svg" alt="login" class="img-fluid" style="max-width: 90%; height: auto;">
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="p-5">

@@ -58,6 +58,10 @@ function ubah_tamu($data)
         $gambar = $gambarLama;
     } else {
         $gambar = uploadGambar();
+
+        if (!$gambar) {
+            return false;
+        }
     }
 
     $query = "UPDATE bukutamu SET
@@ -95,6 +99,11 @@ function tambah_user($data)
     $username = htmlspecialchars($data["username"]);
     $password = htmlspecialchars($data["password"]);
     $user_role = htmlspecialchars($data["user_role"]);
+
+    if (strlen($password) < 6) {
+        echo "<script>alert('Password minimal harus 6 karakter!');window.location='user.php';</script>";
+        return false;
+    }
 
     //Enkripsi password dengan password_hash
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -144,6 +153,12 @@ function ganti_password($data)
 
     $kode = htmlspecialchars($data["id_user"]);
     $password = htmlspecialchars($data["password"]);
+
+    if (strlen($password) < 6) {
+        echo "<script>alert('Password minimal harus 6 karakter!');window.location='user.php';</script>";
+        return false;
+    }
+
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     $query = "UPDATE users SET
@@ -173,7 +188,7 @@ function uploadGambar()
 
     //cek apakah yang diunggah adalah gambar
     $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
-    $ekstensiGambar = explode('.',  $namaFile);
+    $ekstensiGambar = explode('.', $namaFile);
     $ekstensiGambar = strtolower(end($ekstensiGambar));
     if (!in_array($ekstensiGambar, $ekstensiGambarValid)) {
         echo "<script>
@@ -185,8 +200,8 @@ function uploadGambar()
     //jika lolos pengecekan, gambar akan diunggah
     //generate nama gambar baru dengan uniqid()
     $namaFileBaru = uniqid();
-    $namaFileBaru = '.';
-    $namaFileBaru = $ekstensiGambar;
+    $namaFileBaru .= '.';
+    $namaFileBaru .= $ekstensiGambar;
 
     move_uploaded_file($tmpName, 'assets/upload_gambar/' . $namaFileBaru);
 

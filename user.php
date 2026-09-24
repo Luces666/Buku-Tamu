@@ -136,13 +136,13 @@ $kodeuser = $huruf . sprintf("%02s", $urutan);
                     </div>
                     <div class="form-group row">
                         <label for="password" class="col-sm-3 col-form-label">Password</label>
-                        <div class="col=sm-8">
-                            <input type="password" class="form-control" id="password" name="password">
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="password" name="password" minlength="6" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="user_role" class="col-sm-3 col-form-label">User Role</label>
-                        <div class="col=sm-8">
+                        <div class="col-sm-8">
                             <select class="form-control" id="user_role" name="user_role">
                                 <option value="admin">Administrator</option>
                                 <option value="operator">Operator</option>
@@ -160,6 +160,7 @@ $kodeuser = $huruf . sprintf("%02s", $urutan);
 </div>
 
 <!-- Modal Ganti Password -->
+<!-- Modal Ganti Password -->
 <div class="modal fade" id="gantiPassword" tabindex="-1" aria-labelledby="gantiPasswordLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -171,22 +172,36 @@ $kodeuser = $huruf . sprintf("%02s", $urutan);
             </div>
             <div class="modal-body">
                 <form method="post" action="">
-                    <input type="hidden" name="id_user">
+                    <input type="hidden" name="id_user" id="id_user_password">
                     <div class="form-group row">
                         <label for="password" class="col-sm-4 col-form-label">Password Baru</label>
                         <div class="col-sm-7">
                             <input type="password" name="password" id="password" class="form-control">
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
-                        <button type="submit" name="ganti_password" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                <button type="submit" name="ganti_password" class="btn btn-primary">Simpan</button>
+            </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <?php
-    include_once('templates/footer.php');
-    ?>
+<?php
+include_once('templates/footer.php');
+?>
+
+<script>
+    $('#gantiPassword').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var modal = $(this);
+        modal.find('.modal-body input[name="id_user"]').val(id);
+    });
+</script>
+
+<?php
+include_once('templates/footer.php');
+?>
